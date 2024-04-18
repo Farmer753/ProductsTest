@@ -1,4 +1,4 @@
-package ru.ll.productstest.api
+package ru.ll.productstest.domain.api
 
 import retrofit2.http.POST
 

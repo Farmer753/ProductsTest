@@ -1,4 +1,4 @@
-package ru.ll.productstest.api
+package ru.ll.productstest.domain.api
 
 data class NwTags(
     val id: Int,

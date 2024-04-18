@@ -1,6 +1,6 @@
-package ru.ll.productstest.api
+package ru.ll.productstest.domain
 
-data class NwProducts(
+data class UiProducts(
     val id: Int,
     val categoryId: Int,
     val name: String,
@@ -14,5 +14,6 @@ data class NwProducts(
     val proteinsPer100grams: Double,
     val fatsPer100grams: Double,
     val carbohydratesPer100grams: Double,
-    val tagIds: NwTags
+    val tagId: Int,
+    val tagName: String
 )
