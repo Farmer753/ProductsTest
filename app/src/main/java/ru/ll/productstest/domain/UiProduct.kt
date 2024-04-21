@@ -1,6 +1,6 @@
 package ru.ll.productstest.domain
 
-data class UiProducts(
+data class UiProduct(
     val id: Int,
     val categoryId: Int,
     val name: String,
@@ -14,6 +14,5 @@ data class UiProducts(
     val proteinsPer100grams: Double,
     val fatsPer100grams: Double,
     val carbohydratesPer100grams: Double,
-    val tagId: Int,
-    val tagName: String
+    val tagIds: List<Int>
 )

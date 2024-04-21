@@ -1,9 +1,9 @@
 package ru.ll.productstest.domain.api
 
-import retrofit2.http.POST
+import retrofit2.http.GET
 
 interface TagsApi {
 
-    @POST("getAllTags")
-    suspend fun getAllTags(): NwTags
+    @GET("getAllTags")
+    suspend fun getAllTags(): List<NwTag>
 }

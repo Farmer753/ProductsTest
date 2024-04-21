@@ -1,9 +1,9 @@
 package ru.ll.productstest.domain.api
 
-import retrofit2.http.POST
+import retrofit2.http.GET
 
 interface CategoriesApi {
 
-    @POST("getAllCategories")
-    suspend fun getAllCategories(): NwCategories
+    @GET("getAllCategories")
+    suspend fun getAllCategories(): List<NwCategory>
 }

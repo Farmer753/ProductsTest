@@ -1,6 +1,6 @@
 package ru.ll.productstest.domain
 
-data class UiCategories(
+data class UiCategory(
     val id: Int,
     val name: String
 )

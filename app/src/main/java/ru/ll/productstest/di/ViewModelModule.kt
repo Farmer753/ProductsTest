@@ -9,5 +9,5 @@ import ru.ll.productstest.ui.ProductViewModel
 fun viewModelModule() = module {
     viewModel { ProductViewModel() }
     viewModel { BasketViewModel() }
-    viewModel { CatalogViewModel() }
+    viewModel { CatalogViewModel(get(), get(), get()) }
 }

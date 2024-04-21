@@ -1,9 +1,9 @@
 package ru.ll.productstest.domain.api
 
-import retrofit2.http.POST
+import retrofit2.http.GET
 
 interface ProductsApi {
 
-    @POST("getAllProducts")
-    suspend fun getAllProducts(): NwProducts
+    @GET("getAllProducts")
+    suspend fun getAllProducts(): List<NwProduct>
 }

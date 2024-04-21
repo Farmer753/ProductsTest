@@ -1,6 +1,6 @@
 package ru.ll.productstest.domain.api
 
-data class NwCategories(
+data class NwCategory(
     val id: Int,
     val name: String
 )
