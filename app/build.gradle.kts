@@ -74,4 +74,7 @@ dependencies {
     implementation(libs.moshi)
 //logging-interceptor
     implementation(libs.interceptor)
+    //    coil
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
 }
