@@ -2,26 +2,33 @@ package ru.ll.productstest.ui
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import coil.compose.AsyncImage
 import ru.ll.productstest.R
+import ru.ll.productstest.ui.theme.Dark60
+import ru.ll.productstest.ui.theme.ProductsTestTheme
 
 class ProductViewModel : ViewModel() {
-    @Preview(widthDp = 180, heightDp = 200)
+
+    @Preview
+    @Composable
+    fun ColumnSamplePreview() {
+        ProductsTestTheme {
+            ColumnSample()
+        }
+    }
+
     @Composable
     fun ColumnSample() {
         Column {
@@ -30,8 +37,8 @@ class ProductViewModel : ViewModel() {
                 contentDescription = "test",
                 placeholder = debugPlaceholder(R.drawable.ic_launcher_background),
                 modifier = Modifier
-                    .height(375.dp)
-                    .width(375.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
             )
             TextExample()
         }
@@ -69,19 +76,12 @@ class ProductViewModel : ViewModel() {
 
             Text(
                 text = "Том Ям",
-                style = TextStyle(
-                    color = Color.Black,
-                    fontSize = 34.sp,
-                    fontWeight = FontWeight.Bold,
-                )
+                style = MaterialTheme.typography.h4
             )
             Text(
                 text = "Кокосовое молоко, кальмары, креветки,\n" +
                         "помидоры черри, грибы вешанки",
-                style = TextStyle(
-                    color = Color.Black,
-                    fontSize = 16.sp,
-                )
+                style = MaterialTheme.typography.body1.copy(color = Dark60)
             )
         }
     }
