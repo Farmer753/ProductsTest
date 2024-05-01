@@ -1,6 +1,7 @@
 package ru.ll.productstest.ui
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -64,7 +67,8 @@ class ProductViewModel : ViewModel() {
 //                TODO: corner radius
                 Button(
                     onClick = { },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = MaterialTheme.shapes.medium
                 ) {
                     Text(
                         text = "В корзину за 720 Р",
@@ -73,8 +77,26 @@ class ProductViewModel : ViewModel() {
                 }
             }
         }
-        //                TODO: back button
+
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            FloatingActionButton(
+                onClick = { },
+                backgroundColor = Color.White
+//                elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 1.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic24_arrow_left),
+                    contentDescription = "back",
+                    modifier = Modifier
+                        .padding(10.dp)
+                )
+            }
+        }
     }
+
 
     @Composable
     fun ProductTitleView() {
@@ -132,12 +154,12 @@ class ProductViewModel : ViewModel() {
             }
         }
     }
-}
 
-@Composable
-fun debugPlaceholder(@DrawableRes debugPreview: Int) =
-    if (LocalInspectionMode.current) {
-        painterResource(id = debugPreview)
-    } else {
-        null
-    }
+    @Composable
+    fun debugPlaceholder(@DrawableRes debugPreview: Int) =
+        if (LocalInspectionMode.current) {
+            painterResource(id = debugPreview)
+        } else {
+            null
+        }
+}

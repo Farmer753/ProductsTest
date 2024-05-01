@@ -44,6 +44,7 @@ fun ProductsTestTheme(
     MaterialTheme(
         colors = colorScheme,
         typography = Typography,
-        content = content
+        content = content,
+        shapes = shapes
     )
 }
