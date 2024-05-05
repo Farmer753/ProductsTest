@@ -15,7 +15,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.FloatingActionButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -64,7 +63,6 @@ class ProductViewModel : ViewModel() {
                 ProductDetailsView()
             }
             Box(modifier = Modifier.padding(16.dp, 12.dp)) {
-//                TODO: corner radius
                 Button(
                     onClick = { },
                     modifier = Modifier.fillMaxWidth(),
@@ -122,15 +120,16 @@ class ProductViewModel : ViewModel() {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            val measureUnit = "г"
             val data = listOf(
-                stringResource(id = R.string.measure) to 400.0,
-                stringResource(id = R.string.energyPer100grams) to 198.9,
-                stringResource(id = R.string.proteinsPer100grams) to 10.0,
-                stringResource(id = R.string.fatsPer100grams) to 8.5,
-                stringResource(id = R.string.carbohydratesPer100grams) to 19.7,
+                Triple(stringResource(id = R.string.measure), 400.0, measureUnit),
+                Triple(stringResource(id = R.string.energyPer100grams), 198.9, "ккал"),
+                Triple(stringResource(id = R.string.proteinsPer100grams), 10.0, measureUnit),
+                Triple(stringResource(id = R.string.fatsPer100grams), 8.5, measureUnit),
+                Triple(stringResource(id = R.string.carbohydratesPer100grams), 19.7, measureUnit),
             )
             Divider(color = Dark12, thickness = 1.dp)
-            data.forEach { (title, value) ->
+            data.forEach { (title, value, measureUnitText) ->
                 Row(
                     modifier = Modifier.padding(16.dp, 13.dp)
                 ) {
@@ -143,7 +142,7 @@ class ProductViewModel : ViewModel() {
 
                     )
                     Text(
-                        text = value.toString(),
+                        text = "$value $measureUnitText",
                         style = MaterialTheme.typography.body1,
                         modifier = Modifier
                             .wrapContentWidth()
