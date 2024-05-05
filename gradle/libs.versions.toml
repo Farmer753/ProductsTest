@@ -12,6 +12,8 @@ retrofit-adapter = "3.0.0"
 okhttp = "4.12.0"
 moshi = "2.9.0"
 logging-interceptor = "4.11.0"
+coil = "2.5.0"
+coil-compose = "2.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -20,17 +22,19 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 koin = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
-retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
-adapter = {group = "com.github.akarnokd", name = "rxjava3-retrofit-adapter", version.ref = "retrofit-adapter"}
-okhttp = {group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp"}
-moshi = {group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshi"}
-interceptor = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-interceptor"}
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+adapter = { group = "com.github.akarnokd", name = "rxjava3-retrofit-adapter", version.ref = "retrofit-adapter" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshi" }
+interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-interceptor" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil-compose"  }
 
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-material = { group = "androidx.compose.material", name = "material" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ProductsTest</string>
+    <string name="measure">Вес</string>
+    <string name="energyPer100grams">Энерг. ценность</string>
+    <string name="proteinsPer100grams">Белки</string>
+    <string name="fatsPer100grams">Жиры</string>
+    <string name="carbohydratesPer100grams">Углеводы</string>
 </resources>
