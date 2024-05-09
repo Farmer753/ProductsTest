@@ -1,6 +1,7 @@
 package ru.ll.productstest.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,12 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.ll.productstest.R
+import ru.ll.productstest.domain.UiCategory
 import ru.ll.productstest.ui.theme.ProductsTestTheme
 
 @Preview
@@ -64,11 +68,25 @@ fun Catalog() {
                 )
             }
         }
-        val selected = remember {
-            mutableStateOf(false)
+        val categories: MutableState<List<UiCategory>> = remember {
+            mutableStateOf(
+                listOf(
+                    UiCategory(1, "Роллы", true),
+                    UiCategory(2, "Суши"),
+                    UiCategory(3, "Наборы"),
+                    UiCategory(4, "Горячие блюда"),
+                )
+            )
         }
-        SelectableButton(selected = selected.value, text = "Роллы") {
-            selected.value = selected.value.not()
+        Categories(categories) { selectedCategory ->
+            categories.value = categories.value.map { category ->
+//                val category = categories[it]
+                if (category.id == selectedCategory.id) {
+                    category.copy(selected = true)
+                } else {
+                    category.copy(selected = false)
+                }
+            }
         }
         Box(modifier = Modifier.padding(16.dp, 12.dp)) {
             Button(
@@ -100,14 +118,42 @@ fun SelectableButton(
     text: String,
     onClick: () -> Unit
 ) {
+
     Button(
         onClick = onClick,
         colors = if (selected) {
             ButtonDefaults.buttonColors()
         } else {
             ButtonDefaults.textButtonColors()
-        }
+        },
+        elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
+        shape = MaterialTheme.shapes.medium
     ) {
-        Text(text = text)
+        Text(
+            text = text,
+            color = if (selected) {
+                Color.White
+            } else {
+                Color.Unspecified
+            }
+        )
+    }
+
+}
+
+@Composable
+fun Categories(
+    categories: MutableState<List<UiCategory>>,
+    onClick: (UiCategory) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = 16.dp)
+
+    ) {
+        categories.value.forEach {
+            SelectableButton(it.selected, it.name) { onClick(it) }
+        }
     }
 }
