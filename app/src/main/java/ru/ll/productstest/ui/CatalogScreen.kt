@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -27,6 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.ll.productstest.R
 import ru.ll.productstest.domain.UiCategory
+import ru.ll.productstest.domain.UiProduct
+import ru.ll.productstest.domain.test
 import ru.ll.productstest.ui.theme.ProductsTestTheme
 
 @Preview
@@ -78,7 +83,7 @@ fun Catalog() {
                 )
             )
         }
-        Categories(categories) { selectedCategory ->
+        Categories(categories.value) { selectedCategory ->
             categories.value = categories.value.map { category ->
 //                val category = categories[it]
                 if (category.id == selectedCategory.id) {
@@ -87,6 +92,14 @@ fun Catalog() {
                     category.copy(selected = false)
                 }
             }
+        }
+        val products: MutableState<List<UiProduct>> = remember {
+            mutableStateOf(
+                (1..8).map { test() }
+            )
+        }
+        Products(products.value) {
+//          TODO
         }
         Box(modifier = Modifier.padding(16.dp, 12.dp)) {
             Button(
@@ -143,7 +156,7 @@ fun SelectableButton(
 
 @Composable
 fun Categories(
-    categories: MutableState<List<UiCategory>>,
+    categories: List<UiCategory>,
     onClick: (UiCategory) -> Unit
 ) {
     Row(
@@ -152,8 +165,22 @@ fun Categories(
             .padding(horizontal = 16.dp)
 
     ) {
-        categories.value.forEach {
+        categories.forEach {
             SelectableButton(it.selected, it.name) { onClick(it) }
+        }
+    }
+}
+
+@Composable
+fun Products(
+    products: List<UiProduct>,
+    onClick: (UiProduct) -> Unit
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 128.dp)
+    ) {
+        items(products) { product ->
+            Text(text = product.name)
         }
     }
 }
