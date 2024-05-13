@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -95,10 +97,13 @@ fun Catalog() {
         }
         val products: MutableState<List<UiProduct>> = remember {
             mutableStateOf(
-                (1..8).map { test() }
+                (1..100).map { test() }
             )
         }
-        Products(products.value) {
+        Products(
+            modifier = Modifier.weight(1f),
+            products.value
+        ) {
 //          TODO
         }
         Box(modifier = Modifier.padding(16.dp, 12.dp)) {
@@ -173,14 +178,27 @@ fun Categories(
 
 @Composable
 fun Products(
+    modifier: Modifier = Modifier,
     products: List<UiProduct>,
     onClick: (UiProduct) -> Unit
 ) {
+    val state = rememberLazyGridState()
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp)
+        modifier = modifier,
+        state = state,
+        columns = GridCells.Fixed(2)
     ) {
         items(products) { product ->
-            Text(text = product.name)
+            Product(product = product)
         }
+    }
+}
+//TODO
+@Composable
+fun Product(
+    product: UiProduct
+) {
+    Card {
+        Text(text = product.name)
     }
 }
