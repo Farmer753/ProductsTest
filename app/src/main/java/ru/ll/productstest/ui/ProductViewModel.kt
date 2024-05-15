@@ -155,11 +155,4 @@ class ProductViewModel : ViewModel() {
         }
     }
 
-    @Composable
-    fun debugPlaceholder(@DrawableRes debugPreview: Int) =
-        if (LocalInspectionMode.current) {
-            painterResource(id = debugPreview)
-        } else {
-            null
-        }
 }

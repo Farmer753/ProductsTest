@@ -2,13 +2,17 @@ package ru.ll.productstest.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -28,12 +32,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import ru.ll.productstest.R
 import ru.ll.productstest.domain.UiCategory
 import ru.ll.productstest.domain.UiProduct
 import ru.ll.productstest.domain.test
+import ru.ll.productstest.ui.theme.Dark60
 import ru.ll.productstest.ui.theme.ProductsTestTheme
 
 @Preview
@@ -186,19 +193,44 @@ fun Products(
     LazyVerticalGrid(
         modifier = modifier,
         state = state,
-        columns = GridCells.Fixed(2)
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(products) { product ->
             Product(product = product)
         }
     }
 }
+
 //TODO
 @Composable
 fun Product(
     product: UiProduct
 ) {
     Card {
-        Text(text = product.name)
+        Column {
+            AsyncImage(
+                model = UiProduct.TOM,
+                contentDescription = "test",
+                placeholder = debugPlaceholder(R.drawable.ic_launcher_background),
+                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .wrapContentHeight()
+//                    TODO fix AsyncImage
+                    .size(100.dp)
+            )
+            Text(
+                text = product.name,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.body2
+            )
+            Text(
+                text = "${product.measure} ${product.measureUnit}",
+                style = MaterialTheme.typography.body2.copy(color = Dark60)
+            )
+        }
     }
 }
