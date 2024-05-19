@@ -9,10 +9,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -40,6 +39,7 @@ import ru.ll.productstest.R
 import ru.ll.productstest.domain.UiCategory
 import ru.ll.productstest.domain.UiProduct
 import ru.ll.productstest.domain.test
+import ru.ll.productstest.ui.theme.CardBackgroundColor
 import ru.ll.productstest.ui.theme.Dark60
 import ru.ll.productstest.ui.theme.ProductsTestTheme
 
@@ -209,28 +209,53 @@ fun Products(
 fun Product(
     product: UiProduct
 ) {
-    Card {
+    Card(
+        backgroundColor = CardBackgroundColor
+    ) {
         Column {
             AsyncImage(
                 model = UiProduct.TOM,
                 contentDescription = "test",
                 placeholder = debugPlaceholder(R.drawable.ic_launcher_background),
                 modifier = Modifier
-//                    .fillMaxWidth()
-//                    .wrapContentHeight()
+                    .fillMaxWidth()
 //                    TODO fix AsyncImage
-                    .size(100.dp)
+                    .height(170.dp)
             )
             Text(
                 text = product.name,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier
+                    .padding(12.dp, 12.dp, 12.dp, 4.dp)
             )
             Text(
                 text = "${product.measure} ${product.measureUnit}",
-                style = MaterialTheme.typography.body2.copy(color = Dark60)
+                style = MaterialTheme.typography.body2.copy(color = Dark60),
+                modifier = Modifier
+                    .padding(12.dp, 0.dp, 12.dp, 12.dp)
             )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp, 0.dp, 12.dp, 12.dp)
+            ) {
+                Button(
+                    onClick = { },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                    elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
+                    shape = MaterialTheme.shapes.medium,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = product.priceCurrent.toString(),
+                        style = MaterialTheme.typography.button
+                    )
+                }
+            }
+
         }
     }
 }
