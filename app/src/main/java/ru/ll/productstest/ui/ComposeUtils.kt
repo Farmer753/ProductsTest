@@ -10,6 +10,5 @@ fun debugPlaceholder(@DrawableRes debugPreview: Int) =
     if (LocalInspectionMode.current) {
         painterResource(id = debugPreview)
     } else {
-//        null
-        painterResource(id = debugPreview)
+        null
     }

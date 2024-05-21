@@ -21,7 +21,7 @@ data class UiProduct(
 ) {
     companion object {
         const val TOM =
-            "https://s3-alpha-sig.figma.com/img/6861/f5d0/b3bbfc363f115fdeba2e726f1f1a6c29?Expires=1714953600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RlN19IwLYucTqPZ9RGgaIO5OZKMHiZoz9jqaBg7Gexp0DU~o3XA1dUx3-nn9t3QFUqjZMjXvkR1SRtNDZV-oRynBoG2ty4h9Y~qiC-15SU2im-zSG-6E9~YvLjhw~WNSXE0-pP9BHFmkEXqhLl8eSRQo9DrZlng-1ze0hjll79htaF6kKxDzyv6yNlWAEiqjcIL7CZQ6W4m1iq4~S~wRzda6odMpWdSSRVHkGeNxBMsCUpa9hALkPLIAWHSu8~qaOhfX8AcsCNFlrXM1xVErdVYerIEax1kHCKwOqqBmB0xb6gP8aJL0pq6lL8gmMJINfeBesU4i20-XAAN8BumXBA__"
+            "https://s3-alpha-sig.figma.com/img/6861/f5d0/b3bbfc363f115fdeba2e726f1f1a6c29?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=h0cWSi8ycU3~HjxuiHU3JWL531Xu~rJiCJW1Asrz1sWhsQ4ihMxjdcLg-OJEie8cOkaSeJI2nMwLixoIuootT8v7Va-iiL8znv~MIT4MBoZI5zm7gVV8ha4ZUmpAsdGH-NcIkte0L8K2m1bsnEE8ApjZUfXojXWaTJ-cpP9nSH2mURbH9LTM0Rou4M1MkaxHOJCNDMCCU5XCMZ6i-Rc0YrZxpYJ~qhMbL7EHw-j7EEOyJGSK1u8UMr7Cyv94eQccfLrwg1~J8YMgebFyVMSM7mL6-l~8ygsg5znibQoKOYpyD1LWV3QtHgEgbCNOxyaIDd176K62aVbgtrNjmNqHXA__"
     }
 }
 

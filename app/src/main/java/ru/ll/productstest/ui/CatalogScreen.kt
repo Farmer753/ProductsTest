@@ -213,15 +213,25 @@ fun Product(
         backgroundColor = CardBackgroundColor
     ) {
         Column {
-            AsyncImage(
-                model = UiProduct.TOM,
-                contentDescription = "test",
-                placeholder = debugPlaceholder(R.drawable.ic_launcher_background),
-                modifier = Modifier
-                    .fillMaxWidth()
-//                    TODO fix AsyncImage
-                    .height(170.dp)
-            )
+            Box {
+                AsyncImage(
+                    model = UiProduct.TOM,
+                    contentDescription = "test",
+                    placeholder = debugPlaceholder(R.drawable.ic_launcher_background),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(170.dp)
+                )
+                if (product.priceOld != null) {
+                    Box(modifier = Modifier.padding(8.dp)) {
+                        Image(
+                            painter = painterResource(id = R.drawable.tag),
+                            contentDescription = "скидка"
+                        )
+                    }
+                }
+            }
+
             Text(
                 text = product.name,
                 maxLines = 1,
