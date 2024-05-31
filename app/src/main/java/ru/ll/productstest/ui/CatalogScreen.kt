@@ -31,9 +31,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import ru.ll.productstest.R
 import ru.ll.productstest.domain.UiCategory
@@ -260,9 +263,22 @@ fun Product(
                         .fillMaxWidth()
                 ) {
                     Text(
-                        text = product.priceCurrent.toString(),
+                        text = "${product.priceCurrent} ₽",
                         style = MaterialTheme.typography.button
                     )
+                    if (product.priceOld != null) {
+                        Text(
+                            text = "${product.priceOld} ₽",
+                            style = MaterialTheme.typography.button.copy(
+                                fontWeight = FontWeight.Normal,
+                                fontSize = 14.sp,
+                                lineHeight = 16.sp,
+                                color = Dark60
+                            ),
+                            textDecoration = TextDecoration.LineThrough,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
                 }
             }
 
