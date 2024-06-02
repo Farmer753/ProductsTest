@@ -1,6 +1,8 @@
 package ru.ll.productstest.ui
 
+import android.content.res.Resources.Theme
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,16 +13,20 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -45,6 +52,7 @@ import ru.ll.productstest.domain.test
 import ru.ll.productstest.ui.theme.CardBackgroundColor
 import ru.ll.productstest.ui.theme.Dark60
 import ru.ll.productstest.ui.theme.ProductsTestTheme
+import kotlin.random.Random
 
 @Preview
 @Composable
@@ -117,6 +125,7 @@ fun Catalog() {
 //          TODO
         }
         Box(modifier = Modifier.padding(16.dp, 12.dp)) {
+
             Button(
                 onClick = { },
                 modifier = Modifier.fillMaxWidth(),
@@ -254,34 +263,71 @@ fun Product(
                     .fillMaxWidth()
                     .padding(12.dp, 0.dp, 12.dp, 12.dp)
             ) {
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                    elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
-                    shape = MaterialTheme.shapes.medium,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        text = "${product.priceCurrent} ₽",
-                        style = MaterialTheme.typography.button
-                    )
-                    if (product.priceOld != null) {
+                //TODO
+                if (Random.nextBoolean()) {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                        elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
+                        shape = MaterialTheme.shapes.medium,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
                         Text(
-                            text = "${product.priceOld} ₽",
-                            style = MaterialTheme.typography.button.copy(
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 14.sp,
-                                lineHeight = 16.sp,
-                                color = Dark60
-                            ),
-                            textDecoration = TextDecoration.LineThrough,
-                            modifier = Modifier.padding(start = 8.dp)
+                            text = "${product.priceCurrent} ₽",
+                            style = MaterialTheme.typography.button
                         )
+                        if (product.priceOld != null) {
+                            Text(
+                                text = "${product.priceOld} ₽",
+                                style = MaterialTheme.typography.button.copy(
+                                    fontWeight = FontWeight.Normal,
+                                    fontSize = 14.sp,
+                                    lineHeight = 16.sp,
+                                    color = Dark60
+                                ),
+                                textDecoration = TextDecoration.LineThrough,
+                                modifier = Modifier.padding(start = 8.dp)
+                            )
+                        }
+                    }
+                } else {
+                    Row {
+                        IconButton(
+                            onClick = { },
+//                            shape = MaterialTheme.shapes.medium,
+//                            colors = ButtonDefaults.buttonColors(
+//                                backgroundColor = Color.White,
+//                                contentColor = MaterialTheme.colors.primary
+//                            ), modifier = Modifier.wrapContentSize()
+                            modifier = Modifier.background(Color.White, MaterialTheme.shapes.medium).size(40.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.minus),
+                                contentDescription = "minus"
+                            )
+                        }
+                        Text(
+                            text = "1",
+                            style = MaterialTheme.typography.button
+                        )
+                        IconButton(
+                            onClick = { },
+//                            shape = MaterialTheme.shapes.medium,
+//                            colors = ButtonDefaults.buttonColors(
+//                                backgroundColor = Color.White,
+//                                contentColor = MaterialTheme.colors.primary
+//                            )
+                            modifier = Modifier.background(Color.White,MaterialTheme.shapes.medium).size(40.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.plus),
+                                contentDescription = "plus"
+                            )
+                        }
                     }
                 }
             }
-
         }
     }
 }
