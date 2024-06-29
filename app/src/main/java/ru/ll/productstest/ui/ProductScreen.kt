@@ -35,12 +35,12 @@ import ru.ll.productstest.ui.theme.ProductsTestTheme
 @Composable
 fun ProductPreview() {
     ProductsTestTheme {
-        Product()
+        ProductScreen()
     }
 }
 
 @Composable
-fun Product() {
+fun ProductScreen() {
 
     Column {
         Column(

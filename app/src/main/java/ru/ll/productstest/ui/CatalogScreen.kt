@@ -1,6 +1,5 @@
 package ru.ll.productstest.ui
 
-import android.content.res.Resources.Theme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -15,13 +14,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
@@ -36,7 +33,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -58,12 +54,15 @@ import kotlin.random.Random
 @Composable
 fun CatalogPreview() {
     ProductsTestTheme {
-        Catalog()
+        CatalogScreen()
     }
 }
 
 @Composable
-fun Catalog() {
+fun CatalogScreen(
+    onCategoryClick: (UiCategory) -> Unit = {},
+    onCategorySlugClick: (String) -> Unit = {}
+) {
 
     Column {
         Row(
@@ -127,7 +126,7 @@ fun Catalog() {
         Box(modifier = Modifier.padding(16.dp, 12.dp)) {
 
             Button(
-                onClick = { },
+                onClick = { onCategorySlugClick("hhh") },
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.medium,
             ) {
@@ -211,14 +210,14 @@ fun Products(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(products) { product ->
-            Product(product = product)
+            ProductScreen(product = product)
         }
     }
 }
 
 //TODO
 @Composable
-fun Product(
+fun ProductScreen(
     product: UiProduct
 ) {
     Card(
@@ -300,7 +299,9 @@ fun Product(
 //                                backgroundColor = Color.White,
 //                                contentColor = MaterialTheme.colors.primary
 //                            ), modifier = Modifier.wrapContentSize()
-                            modifier = Modifier.background(Color.White, MaterialTheme.shapes.medium).size(40.dp)
+                            modifier = Modifier
+                                .background(Color.White, MaterialTheme.shapes.medium)
+                                .size(40.dp)
                         ) {
                             Icon(
                                 painter = painterResource(id = R.drawable.minus),
@@ -318,7 +319,9 @@ fun Product(
 //                                backgroundColor = Color.White,
 //                                contentColor = MaterialTheme.colors.primary
 //                            )
-                            modifier = Modifier.background(Color.White,MaterialTheme.shapes.medium).size(40.dp)
+                            modifier = Modifier
+                                .background(Color.White, MaterialTheme.shapes.medium)
+                                .size(40.dp)
                         ) {
                             Icon(
                                 painter = painterResource(id = R.drawable.plus),
