@@ -55,14 +55,14 @@ import kotlin.random.Random
 @Composable
 fun CatalogPreview() {
     ProductsTestTheme {
-        CatalogScreen()
+        CategoryProductsScreen("")
     }
 }
 
 @Composable
-fun CatalogScreen(
-    onCategoryClick: (UiCategory) -> Unit = {},
-    onCategorySlugClick: (String) -> Unit = {}
+fun CategoryProductsScreen(
+    categorySlug: String,
+    onProductClick: (UiProduct) -> Unit = {}
 ) {
 
     Column {
@@ -122,12 +122,12 @@ fun CatalogScreen(
             modifier = Modifier.weight(1f),
             products.value
         ) {
-//          TODO
+            onProductClick(it)
         }
         Box(modifier = Modifier.padding(16.dp, 12.dp)) {
 
             Button(
-                onClick = { onCategorySlugClick("hhh") },
+                onClick = { },
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.medium,
             ) {

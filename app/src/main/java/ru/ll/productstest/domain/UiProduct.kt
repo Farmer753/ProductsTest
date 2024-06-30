@@ -1,8 +1,10 @@
 package ru.ll.productstest.domain
 
+import kotlinx.serialization.Serializable
 import ru.ll.productstest.domain.UiProduct.Companion.TOM
 import kotlin.random.Random
 
+@Serializable
 data class UiProduct(
     val id: Int,
     val categoryId: Int,

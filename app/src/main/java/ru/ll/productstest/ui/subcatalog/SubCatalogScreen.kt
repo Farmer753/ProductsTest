@@ -104,6 +104,7 @@ fun SubCatalogScreen(
             )
         }
         Categories(categories.value) { selectedCategory ->
+            onCategoryClick(selectedCategory)
             categories.value = categories.value.map { category ->
 //                val category = categories[it]
                 if (category.id == selectedCategory.id) {

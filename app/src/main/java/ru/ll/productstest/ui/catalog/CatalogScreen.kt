@@ -55,7 +55,7 @@ import kotlin.random.Random
 @Composable
 fun CatalogPreview() {
     ProductsTestTheme {
-        ru.ll.productstest.ui.categoryproducts.CatalogScreen()
+       CatalogScreen()
     }
 }
 
@@ -103,7 +103,8 @@ fun CatalogScreen(
                 )
             )
         }
-        ru.ll.productstest.ui.categoryproducts.Categories(categories.value) { selectedCategory ->
+        Categories(categories.value) { selectedCategory ->
+            onCategoryClick(selectedCategory)
             categories.value = categories.value.map { category ->
 //                val category = categories[it]
                 if (category.id == selectedCategory.id) {
@@ -118,7 +119,7 @@ fun CatalogScreen(
                 (1..100).map { test() }
             )
         }
-        ru.ll.productstest.ui.categoryproducts.Products(
+       Products(
             modifier = Modifier.weight(1f),
             products.value
         ) {
@@ -190,7 +191,7 @@ fun Categories(
 
     ) {
         categories.forEach {
-            ru.ll.productstest.ui.categoryproducts.SelectableButton(it.selected, it.name) {
+           SelectableButton(it.selected, it.name) {
                 onClick(
                     it
                 )
@@ -215,7 +216,7 @@ fun Products(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(products) { product ->
-            ru.ll.productstest.ui.categoryproducts.ProductScreen(product = product)
+            ProductScreen(product = product)
         }
     }
 }

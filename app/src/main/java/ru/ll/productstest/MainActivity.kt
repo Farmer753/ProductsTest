@@ -10,9 +10,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
-import ru.ll.productstest.ui.categoryproducts.CatalogScreen
-import ru.ll.productstest.ui.categoryproducts.ProductScreen
+import ru.ll.productstest.domain.UiCategory
+import ru.ll.productstest.domain.UiProduct
+import ru.ll.productstest.ui.catalog.CatalogScreen
+import ru.ll.productstest.ui.categoryproducts.CategoryProductsScreen
+import ru.ll.productstest.ui.product.ProductScreen
+import ru.ll.productstest.ui.subcatalog.SubCatalogScreen
 import ru.ll.productstest.ui.theme.ProductsTestTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,12 +27,13 @@ class MainActivity : ComponentActivity() {
 
     // Define a asset page destination that takes an ID
     @Serializable
-    data class SubCatalog(val instrumentId: String)
-    @Serializable
-    data class CategoryProducts(val instrumentId: String)
+    data class SubCatalog(val uiCategory: UiCategory)
 
     @Serializable
-    data class Product(val instrumentId: String)
+    data class CategoryProducts(val categorySlug: String)
+
+    @Serializable
+    data class Product(val product: UiProduct)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,32 +43,35 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController, startDestination = Catalog) {
                     composable<Catalog> {
                         CatalogScreen(
-                            onCategorySlugClick = { instrumentId ->
-//                                navController.navigate(
-//                                    AssetPage(instrumentId = instrumentId)
-//                                )
-                                navController.navigate(Product("Продукт"))
+                            onCategorySlugClick = { categorySlug ->
+                                navController.navigate(CategoryProducts(categorySlug))
+                            },
+                            onCategoryClick = { category ->
+                                navController.navigate(SubCatalog(category))
                             }
                         )
                     }
-                    composable<Product> {
+                    composable<SubCatalog> {
+                        SubCatalogScreen(
+                            onCategorySlugClick = { categorySlug ->
+                                navController.navigate(CategoryProducts(categorySlug))
+                            },
+                            onCategoryClick = { category ->
+                                navController.navigate(SubCatalog(category))
+                            }
+                        )
+                    }
+                    composable<CategoryProducts> { backStackEntry ->
+                        val categorySlug: String = backStackEntry.toRoute()
+                        CategoryProductsScreen(categorySlug) {
+                            navController.navigate(Product(it))
+                        }
+                    }
+                    composable<Product> { backStackEntry ->
+                        val product: UiProduct = backStackEntry.toRoute()
                         ProductScreen()
                     }
-//                    composable<SubCatalog> { backStackEntry ->
-//                        val subCatalog: SubCatalog = backStackEntry.toRoute()
-//                        AssetPageScreen(
-//                            instrumentId = subCatalog.instrumentId
-//                        )
-//                    }
                 }
-
-                // A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colors.background
-//                ) {
-//                    Greeting("Android")
-//                }
             }
         }
     }
