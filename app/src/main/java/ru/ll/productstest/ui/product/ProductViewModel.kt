@@ -1,4 +1,4 @@
-package ru.ll.productstest.ui
+package ru.ll.productstest.ui.product
 
 import androidx.lifecycle.ViewModel
 

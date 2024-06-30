@@ -1,4 +1,4 @@
-package ru.ll.productstest.ui
+package ru.ll.productstest.ui.product
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import ru.ll.productstest.R
 import ru.ll.productstest.domain.UiProduct
+import ru.ll.productstest.ui.debugPlaceholder
 import ru.ll.productstest.ui.theme.Dark12
 import ru.ll.productstest.ui.theme.Dark60
 import ru.ll.productstest.ui.theme.ProductsTestTheme
