@@ -17,8 +17,11 @@ import ru.ll.productstest.domain.UiProduct
 import ru.ll.productstest.ui.catalog.CatalogScreen
 import ru.ll.productstest.ui.categoryproducts.CategoryProductsScreen
 import ru.ll.productstest.ui.product.ProductScreen
+import ru.ll.productstest.ui.serializableType
 import ru.ll.productstest.ui.subcatalog.SubCatalogScreen
 import ru.ll.productstest.ui.theme.ProductsTestTheme
+import timber.log.Timber
+import kotlin.reflect.typeOf
 
 class MainActivity : ComponentActivity() {
 
@@ -44,30 +47,42 @@ class MainActivity : ComponentActivity() {
                     composable<Catalog> {
                         CatalogScreen(
                             onCategorySlugClick = { categorySlug ->
+                                Timber.d("CatalogScreen onCategorySlugClick $categorySlug")
                                 navController.navigate(CategoryProducts(categorySlug))
                             },
                             onCategoryClick = { category ->
+                                Timber.d("CatalogScreen onCategoryClick $category")
+
                                 navController.navigate(SubCatalog(category))
                             }
                         )
                     }
-                    composable<SubCatalog> {
+                    composable<SubCatalog>(
+                        typeMap = mapOf(typeOf<UiCategory>() to serializableType<UiCategory>())
+                    ) {
                         SubCatalogScreen(
                             onCategorySlugClick = { categorySlug ->
+                                Timber.d("SubCatalogScreen onCategorySlugClick $categorySlug")
                                 navController.navigate(CategoryProducts(categorySlug))
                             },
                             onCategoryClick = { category ->
+                                Timber.d("SubCatalogScreen onCategoryClick $category")
                                 navController.navigate(SubCatalog(category))
                             }
                         )
                     }
                     composable<CategoryProducts> { backStackEntry ->
-                        val categorySlug: String = backStackEntry.toRoute()
-                        CategoryProductsScreen(categorySlug) {
+                        Timber.d("CategoryProducts 75")
+                        val categorySlug: String? = backStackEntry.toRoute()
+                        Timber.d("CategoryProducts 77")
+                        CategoryProductsScreen(categorySlug ?: "") {
+                            Timber.d("CategoryProducts onProductClick $it")
                             navController.navigate(Product(it))
                         }
                     }
-                    composable<Product> { backStackEntry ->
+                    composable<Product>(
+                        typeMap = mapOf(typeOf<UiProduct>() to serializableType<UiProduct>())
+                    ) { backStackEntry ->
                         val product: UiProduct = backStackEntry.toRoute()
                         ProductScreen()
                     }

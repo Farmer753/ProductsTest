@@ -22,6 +22,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -211,18 +212,21 @@ fun Products(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(products) { product ->
-            ProductScreen(product = product)
+            Product(product = product, onClick=onClick)
         }
     }
 }
 
 //TODO
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProductScreen(
-    product: UiProduct
+fun Product(
+    product: UiProduct,
+    onClick: (UiProduct) -> Unit
 ) {
     Card(
-        backgroundColor = CardBackgroundColor
+        backgroundColor = CardBackgroundColor,
+        onClick = {onClick(product)}
     ) {
         Column {
             Box {
