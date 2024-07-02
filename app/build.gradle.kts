@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material)
+    implementation(libs.play.services.maps)
     debugImplementation(libs.androidx.ui.tooling)
     //Logging
     implementation(libs.timber)
