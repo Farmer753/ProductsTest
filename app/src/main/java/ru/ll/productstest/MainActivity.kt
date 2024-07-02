@@ -21,6 +21,8 @@ import ru.ll.productstest.ui.serializableType
 import ru.ll.productstest.ui.subcatalog.SubCatalogScreen
 import ru.ll.productstest.ui.theme.ProductsTestTheme
 import timber.log.Timber
+import java.net.URLDecoder
+import java.net.URLEncoder
 import kotlin.reflect.typeOf
 
 class MainActivity : ComponentActivity() {
@@ -73,18 +75,35 @@ class MainActivity : ComponentActivity() {
                     }
                     composable<CategoryProducts> { backStackEntry ->
                         Timber.d("CategoryProducts 75")
-                        val categorySlug: String? = backStackEntry.toRoute()
+                        val categoryProduct: CategoryProducts = backStackEntry.toRoute()
                         Timber.d("CategoryProducts 77")
-                        CategoryProductsScreen(categorySlug ?: "") {
-                            Timber.d("CategoryProducts onProductClick $it")
-                            navController.navigate(Product(it))
+                        CategoryProductsScreen(categoryProduct.categorySlug) { uiProduct ->
+                            Timber.d("CategoryProducts onProductClick $uiProduct")
+                            navController.navigate(
+                                Product(
+                                    uiProduct.copy(
+                                        image = URLEncoder.encode(
+                                            uiProduct.image, Charsets.UTF_8.name()
+                                        )
+                                    )
+                                )
+                            )
                         }
                     }
                     composable<Product>(
                         typeMap = mapOf(typeOf<UiProduct>() to serializableType<UiProduct>())
                     ) { backStackEntry ->
-                        val product: UiProduct = backStackEntry.toRoute()
+                        val product: Product = backStackEntry.toRoute()
+                        val uiProduct = product.product.copy(
+                            image = URLDecoder.decode(
+                                product.product.image,
+                                Charsets.UTF_8.name()
+                            )
+                        )
+                        Timber.d("product.product ${product.product} ")
+                        Timber.d("to ProductScreen uiProduct $uiProduct ")
                         ProductScreen()
+
                     }
                 }
             }
