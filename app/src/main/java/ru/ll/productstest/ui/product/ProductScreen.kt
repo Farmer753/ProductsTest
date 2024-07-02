@@ -59,7 +59,7 @@ fun ProductScreen() {
             ) {
 
                 Image(
-                    painter = painterResource(id = R.drawable.ic24_arrow_left),
+                    painter = painterResource(id = R.drawable.vector),
                     contentDescription = "back",
                     modifier = Modifier
                         .padding(10.dp)
@@ -74,7 +74,7 @@ fun ProductScreen() {
             ) {
 
                 Image(
-                    painter = painterResource(id = R.drawable.plus),
+                    painter = painterResource(id = R.drawable.share_symbol),
                     contentDescription = "back",
                     modifier = Modifier
                         .padding(10.dp)
