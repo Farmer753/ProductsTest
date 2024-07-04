@@ -101,6 +101,14 @@ fun Product(
         Row {
             Column {
                 Box(modifier = Modifier.padding(16.dp, 12.dp)) {
+                    AsyncImage(
+                        model = UiProduct.TOM,
+                        contentDescription = "test",
+                        placeholder = debugPlaceholder(R.drawable.ic_launcher_background),
+                        modifier = Modifier
+                            .size(114.dp, 101.dp)
+
+                    )
                     Button(
                         onClick = { },
                         modifier = Modifier.size(72.dp, 35.dp),
@@ -111,19 +119,10 @@ fun Product(
                             color = Color.White
                         )
                     }
-                    AsyncImage(
-                        model = UiProduct.TOM,
-                        contentDescription = "test",
-                        placeholder = debugPlaceholder(R.drawable.ic_launcher_background),
-                        modifier = Modifier
-                            .size(114.dp, 101.dp)
-
-                    )
                 }
                 Box(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .weight(1f)
+                        .padding(start = 16.dp)
                         .wrapContentHeight()
                 ) {
                     Image(
