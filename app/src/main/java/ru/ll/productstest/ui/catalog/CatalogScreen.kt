@@ -1,13 +1,20 @@
 package ru.ll.productstest.ui.catalog
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
@@ -23,10 +30,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ru.ll.productstest.MainActivity
 import ru.ll.productstest.R
 import ru.ll.productstest.domain.UiCategory
 import ru.ll.productstest.domain.UiProduct
 import ru.ll.productstest.domain.test
+import ru.ll.productstest.ui.categoryproducts.Product
 import ru.ll.productstest.ui.categoryproducts.Products
 import ru.ll.productstest.ui.subcatalog.Categories
 import ru.ll.productstest.ui.theme.ProductsTestTheme
@@ -45,61 +54,20 @@ fun CatalogScreen(
     onCategorySlugClick: (String) -> Unit = {}
 ) {
 
+
     Column {
-        Row(
-            modifier = Modifier.padding(start = 8.dp, top = 16.dp, end = 8.dp),
-            verticalAlignment = Alignment.Bottom
-        ) {
-            Box(modifier = Modifier.padding(10.dp)) {
-                Icon(
-                    painter = painterResource(id = R.drawable.filter),
-                    contentDescription = "filter"
-                )
-            }
             Box(
-                modifier = Modifier
-                    .weight(1f)
+                modifier = Modifier.padding(16.dp)
             )
             {
-                Image(
-                    painter = painterResource(id = R.drawable.logo),
-                    contentDescription = "logo"
-                )
+                Text(text = "Каталог товаров")
             }
-            Box(modifier = Modifier.padding(10.dp)) {
-                Icon(
-                    painter = painterResource(id = R.drawable.search),
-                    contentDescription = "search"
-                )
-            }
-        }
-        val categories: MutableState<List<UiCategory>> = remember {
-            mutableStateOf(
-                listOf(
-                    UiCategory(1, "Роллы", true),
-                    UiCategory(2, "Суши"),
-                    UiCategory(3, "Наборы"),
-                    UiCategory(4, "Горячие блюда"),
-                )
-            )
-        }
-        Categories(categories.value) { selectedCategory ->
-            onCategoryClick(selectedCategory)
-            categories.value = categories.value.map { category ->
-//                val category = categories[it]
-                if (category.id == selectedCategory.id) {
-                    category.copy(selected = true)
-                } else {
-                    category.copy(selected = false)
-                }
-            }
-        }
         val products: MutableState<List<UiProduct>> = remember {
             mutableStateOf(
                 (1..100).map { test() }
             )
         }
-        Products(
+        CatalogStart(
             modifier = Modifier.weight(1f),
             products.value
         ) {
@@ -124,37 +92,33 @@ fun CatalogScreen(
                 )
             }
 
-        }
+        }}
     }
-
 
     @Composable
-    fun SelectableButton(
-        selected: Boolean,
-        text: String,
-        onClick: () -> Unit
-    ) {
+    fun CatalogStart(modifier: Modifier = Modifier,
+                products: List<UiProduct>,
+                onClick: (UiProduct) -> Unit){
+        Column {
+            Row (){
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .weight(1f)
+                        .wrapContentHeight()
+                ) {
 
-        Button(
-            onClick = onClick,
-            colors = if (selected) {
-                ButtonDefaults.buttonColors()
-            } else {
-                ButtonDefaults.textButtonColors()
-            },
-            elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
-            shape = MaterialTheme.shapes.medium
-        ) {
-            Text(
-                text = text,
-                color = if (selected) {
-                    Color.White
-                } else {
-                    Color.Unspecified
+                    Image(
+                        painter = painterResource(id = R.drawable.group_10_1),
+                        contentDescription = "back",
+                        modifier = Modifier
+                            .padding(10.dp)
+                    )
                 }
-            )
+                Text(text = "Пиломатериалы")
+            }
         }
-
     }
-}
+
+
 
